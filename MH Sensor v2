@@ -1,0 +1,36 @@
+//this sensor code uses a digital input rather than an analog input.
+
+//This code uses digital pin 9. Make sure you are using the Digital Out pin on the MH sensor (although it will still work with the analog pin, just not aswell)
+
+// Define pin connections
+const int sensorPin = 12; // Analog pin connected to AO pin of the sensor
+const int ledPin = 13;    // Digital pin connected to the LED
+
+
+void setup() {
+  // Initialize serial communication
+  Serial.begin(9600);
+  pinMode(sensorPin, INPUT);  
+  // Initialize LED pin as output
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  // Read the analog value from the sensor
+  int sensorValue = digitalRead(sensorPin);
+  
+  
+  // Check if the distance is within the threshold
+  if (sensorValue == LOW) {
+    // Turn on the LED
+    digitalWrite(ledPin, HIGH);
+    Serial.println("Object detected!");
+  } else {
+    // Turn off the LED
+    digitalWrite(ledPin, LOW);
+    Serial.println("No object detected.");
+  }
+  
+  // Add a delay to prevent rapid readings
+  delay(100); // Adjust delay as needed
+}
