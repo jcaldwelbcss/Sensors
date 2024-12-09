@@ -1,0 +1,38 @@
+// Define pin connections
+const int sensorPin = 2; // Analog pin connected to AO pin of the sensor
+const int ledPin = 13;    // Digital pin connected to the LED
+
+// Define distance threshold in centimeters
+const int thresholdDistance = 50;
+
+void setup() {
+  // Initialize serial communication
+  Serial.begin(9600);
+  
+  // Initialize LED pin as output
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  // Read the analog value from the sensor
+  int sensorValue = digitalRead(sensorPin);
+  
+  // Convert the analog value to distance in centimeters
+ // int distance = map(sensorValue, 0, 1023, 0, 100); // Map the analog value to a distance range
+  
+  // Check if the distance is within the threshold
+  if (sensorValue == 0) {
+    // Turn on the LED
+    digitalWrite(ledPin, HIGH);
+    Serial.println("Object detected!");
+  } else {
+    // Turn off the LED
+    digitalWrite(ledPin, LOW);
+    Serial.println("No object detected.");
+  }
+  
+  
+
+  // Add a delay to prevent rapid readings
+  delay(100); // Adjust delay as needed
+}
